@@ -10,6 +10,7 @@ class SubjectAdmin(admin.ModelAdmin):
 
 class ModuleInline(admin.StackedInline):
     model = Module
+    # admin.StackedInline, will not create a seperate tab for Module but will include the form for including the data of the module into Course
 
 @admin.register(Course)
 class CourseAdmin(admin.ModelAdmin):
@@ -18,3 +19,4 @@ class CourseAdmin(admin.ModelAdmin):
     search_fields = ['title', 'overview']
     prepopulated_fields = {'slug': ('title',)}
     inlines = [ModuleInline]
+    # This lines adds the input of the ModuleInline class into the CourseAdmin interface.
