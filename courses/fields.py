@@ -3,7 +3,7 @@ from django.core.exceptions import ObjectDoesNotExist
 
 class OrderField(models.PositiveIntegerField):
     def __init__(self, for_fields=None, *args, **kwargs):
-        # for_fields is the parameter says that for which field is the order required to be calculated
+        # for_fields is the parameter says that for which field(here course or module) is the order required to be calculated
         self.for_fields = for_fields
         super(OrderField, self).__init__(*args, **kwargs)
 
@@ -23,7 +23,7 @@ class OrderField(models.PositiveIntegerField):
                 value = last_item.order + 1
             except ObjectDoesNotExist:
                 value = 0
-            setattr(model_instance, self.attrname, value)
+            setattr(model_instance, self.attname, value)
             return value
         else:
             return super(OrderField, self).pre_save(model_instance, add)
