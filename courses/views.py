@@ -14,6 +14,7 @@ from .models import Module, Content
 from braces.views import CsrfExemptMixin, JsonRequestResponseMixin
 from django.db.models import Count
 from .models import Subject
+from students.forms import CourseEnrollForm
 
 # Create your views here.
 
@@ -167,3 +168,9 @@ class CourseDetailView(DetailView):
     model = Course
     template_name = 'courses/course/detail.html'
     # DetailView expects a primary key (pk) or a slug URL for getting a single object from the model
+
+    def get_context_data(self, **kwargs):
+        # We use this method to include the enrollment form in the context for rendering the templates.
+        context = super(CourseDetailView, self).get_context_data(**kwargs)
+        context['enroll_form'] = CourseEnrollForm(initial={'course': self.object})
+        return context

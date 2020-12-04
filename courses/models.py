@@ -23,6 +23,8 @@ class Course(models.Model):
     slug = models.SlugField(max_length=200, unique=True)
     overview = models.TextField()
     created = models.DateTimeField(auto_now_add=True)
+    students = models.ManyToManyField(User, related_name = 'course_joined', blank=True)
+    # related_name is the name of the manager through which the opposite model will access this model
 
     class Meta:
         ordering = ['-created']
