@@ -10,6 +10,10 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+from django.urls import reverse_lazy
+# The below line will redirect the newly logged in user to the course list page
+LOGIN_REDIRECT_URL = reverse_lazy('student_course_list')
+
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
